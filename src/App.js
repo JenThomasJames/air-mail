@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import "./App.css";
 import Navbar from "./components/Navbar";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Compose from "./pages/Compose";
 import Inbox from "./pages/Inbox";
 import Outbox from "./pages/Outbox";
@@ -22,6 +22,7 @@ function App() {
             <Route path="sent" element={<Outbox />} />
             <Route path="archive" element={<Archive />} />
             <Route path="account" element={<Account />} />
+            <Route path="*" element={<Navigate to="auth" />} />
           </Routes>
         </header>
       </div>
