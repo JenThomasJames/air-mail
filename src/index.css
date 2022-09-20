@@ -1,3 +1,12 @@
+:root {
+  --brand: #1fbabf;
+  --primary: #e984a2;
+  --secondary: #b9cc95;
+  --spring: #9cee8c;
+  --ocean: #60d3aa;
+  --dark-ocean: #51b491;
+}
+
 * {
   margin: 0px;
   padding: 0px;

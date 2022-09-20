@@ -14,6 +14,9 @@ const Navbar = () => {
         <h1 className={styles.logo}>air</h1>
       </div>
       <div className={styles.links}>
+        <NavLink className={styles.auth} to="auth">
+          Login
+        </NavLink>
         <NavLink
           className={(navData) =>
             navData.isActive ? styles.active : styles.link
