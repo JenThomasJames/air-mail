@@ -46,21 +46,27 @@
   border-radius: 10px;
   display: flex;
   flex-direction: column;
-  height: 170px;
+  height: 260px;
+  font-size: 18px;
   justify-content: space-around;
-  padding: 10px;
+  padding: 10px 50px;
   border: 1px solid rgb(234, 234, 234);
 }
 .drawer-link {
   text-decoration: none;
   color: grey;
 }
+.drawer-link-active {
+  text-decoration: none;
+  color: rgba(255, 0, 0, 0.906);
+}
 .drawer-link:hover {
   color: #000;
 }
 
 @media screen and (max-width: 850px) {
-  .link {
+  .link,
+  .active {
     display: none;
   }
   .links {

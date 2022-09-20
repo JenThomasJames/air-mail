@@ -60,19 +60,54 @@ const Navbar = () => {
           </button>
           {showMenu && (
             <div className={styles["menu-drawer"]}>
-              <NavLink className={styles.link} to="new">
+              <NavLink
+                className={(navData) =>
+                  navData.isActive
+                    ? styles["drawer-link-active"]
+                    : styles["drawer-link"]
+                }
+                to="new"
+              >
                 New Mail
               </NavLink>
-              <NavLink className={styles["drawer-link"]} to="inbox">
+              <NavLink
+                className={(navData) =>
+                  navData.isActive
+                    ? styles["drawer-link-active"]
+                    : styles["drawer-link"]
+                }
+                to="inbox"
+              >
                 Inbox
               </NavLink>
-              <NavLink className={styles["drawer-link"]} to="sent">
+              <NavLink
+                className={(navData) =>
+                  navData.isActive
+                    ? styles["drawer-link-active"]
+                    : styles["drawer-link"]
+                }
+                to="sent"
+              >
                 Sent Items
               </NavLink>
-              <NavLink className={styles["drawer-link"]} to="archived">
+              <NavLink
+                className={(navData) =>
+                  navData.isActive
+                    ? styles["drawer-link-active"]
+                    : styles["drawer-link"]
+                }
+                to="archived"
+              >
                 Archived
               </NavLink>
-              <NavLink className={styles["drawer-link"]} to="account">
+              <NavLink
+                className={(navData) =>
+                  navData.isActive
+                    ? styles["drawer-link-active"]
+                    : styles["drawer-link"]
+                }
+                to="account"
+              >
                 Account
               </NavLink>
             </div>
