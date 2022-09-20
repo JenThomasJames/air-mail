@@ -1,0 +1,75 @@
+.navbar {
+  display: flex;
+  padding: 0px 20px;
+  justify-content: space-between;
+  align-items: center;
+}
+.logo {
+  font-family: "Sacramento", cursive;
+  font-size: 5em;
+  color: rgba(255, 0, 0, 0.906);
+  cursor: pointer;
+}
+.brand {
+  flex: 1;
+}
+.links {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex: 1;
+}
+.link {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  text-decoration: none;
+  color: grey;
+  text-overflow: clip;
+}
+.link:hover {
+  color: #000;
+}
+.active {
+  text-decoration: none;
+  color: rgba(255, 0, 0, 0.906);
+}
+.menu-btn {
+  background: transparent;
+  cursor: pointer;
+  border: none;
+  padding: 10px;
+}
+.menu-drawer {
+  position: absolute;
+  right: 30px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  height: 170px;
+  justify-content: space-around;
+  padding: 10px;
+  border: 1px solid rgb(234, 234, 234);
+}
+.drawer-link {
+  text-decoration: none;
+  color: grey;
+}
+.drawer-link:hover {
+  color: #000;
+}
+
+@media screen and (max-width: 850px) {
+  .link {
+    display: none;
+  }
+  .links {
+    flex: 0;
+  }
+}
+
+@media screen and (min-width: 851px) {
+  .menu {
+    display: none;
+  }
+}
