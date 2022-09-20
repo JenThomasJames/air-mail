@@ -42,7 +42,7 @@ const Navbar = () => {
           className={(navData) =>
             navData.isActive ? styles.active : styles.link
           }
-          to="archived"
+          to="archive"
         >
           Archived
         </NavLink>
