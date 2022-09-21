@@ -1,12 +1,13 @@
 import { Fragment } from "react";
-import Login from "../components/Auth/Login";
+import { useState } from "react";
 import Register from "../components/Auth/Register";
+import Login from "../components/Auth/Login";
 const Auth = () => {
-  const registerMode = true;
+  const [registerMode, setRegisterMode] = useState(true);
   return (
     <Fragment>
-      {!registerMode && <Login />}
-      {registerMode && <Register />}
+      {registerMode && <Register changeRegisterMode={setRegisterMode} />}
+      {!registerMode && <Login changeRegisterMode={setRegisterMode} />}
     </Fragment>
   );
 };

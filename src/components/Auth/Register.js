@@ -1,15 +1,18 @@
 import Card from "../Card";
 import styles from "./Register.module.css";
 import useInput from "../../hooks/use-input";
-const Register = () => {
+const Register = (props) => {
   const errorText = <p className="error-text">This field is mandatory!</p>;
-
+  const passwordErrorText = (
+    <p className="error-text">Password must at least be 8 charecters long!</p>
+  );
   const {
     enteredValue: enteredFirstName,
     inputChangeHandler: fnameChangeHandler,
     inputBlurHandler: fnameBlurHandler,
     resetInput: resetFnameHandler,
     isInputInvalid: isFnameInvalid,
+    isValid: isFnameValid,
   } = useInput((value) => {
     return value !== "";
   });
@@ -20,6 +23,7 @@ const Register = () => {
     inputBlurHandler: lnameBlurHandler,
     resetInput: resetLnameHandler,
     isInputInvalid: isLnameInvalid,
+    isValid: isLnameValid,
   } = useInput((value) => {
     return value !== "";
   });
@@ -30,6 +34,7 @@ const Register = () => {
     inputBlurHandler: emailBlurHandler,
     resetInput: resetEmailHandler,
     isInputInvalid: isEmailInvalid,
+    isValid: isEmailValid,
   } = useInput((value) => {
     return value !== "";
   });
@@ -40,8 +45,9 @@ const Register = () => {
     inputBlurHandler: passwordBlurHandler,
     resetInput: resetPasswordHandler,
     isInputInvalid: isPasswordInvalid,
+    isValid: isPasswordValid,
   } = useInput((value) => {
-    return value !== "";
+    return value.length <= 7;
   });
 
   const {
@@ -50,13 +56,55 @@ const Register = () => {
     inputBlurHandler: repeatPasswordBlurHandler,
     resetInput: resetRepeatPasswordHandler,
     isInputInvalid: isRepeatPasswordInvalid,
+    isValid: isRepeatPasswordValid,
   } = useInput((value) => {
     return value !== "";
   });
 
+  const isFormInvalid =
+    !isFnameValid ||
+    !isLnameValid ||
+    !isEmailValid ||
+    !isPasswordValid ||
+    !isRepeatPasswordValid;
+
   //Handler for register from submission
-  const registerHandler = (event) => {
+  const registerHandler = async (event) => {
     event.preventDefault();
+    if (enteredPassword !== enteredRepeatPassword || isFormInvalid) return;
+    const httpConfig = {
+      endpoint:
+        "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCGYZl8BfGbOUSuN3M_OTKNKH_QD7DO47g",
+      method: "POST",
+      body: {
+        email: enteredEmail,
+        password: enteredPassword,
+        returnSecureToken: true,
+      },
+    };
+    try {
+      const data = await fireRequest(httpConfig);
+      if (data.error) {
+        const error = data.error.message
+          ? data.error.message
+          : "Authentication failed!";
+        throw new Error(error);
+      }
+      alert("Registration successful! Login to continue.");
+      props.changeRegisterMode(false);
+    } catch (err) {
+      alert(err.message);
+    }
+  };
+
+  //method to an API Request
+  const fireRequest = async (config) => {
+    const response = await fetch(config.endpoint, {
+      method: config.method ? config.method : "GET",
+      body: config.body ? JSON.stringify(config.body) : {},
+    });
+    const data = await response.json();
+    return data;
   };
 
   const fnameStyle = isFnameInvalid ? "error-input" : "valid-input";
@@ -73,7 +121,7 @@ const Register = () => {
         <h4>Hey There!</h4>
       </div>
       <div className={styles["card-body"]}>
-        <form onSubmit={registerHandler}>
+        <form onSubmit={registerHandler} method="GET">
           <div className={styles["row-group"]}>
             <div className={styles["col-group"]}>
               <input
@@ -123,7 +171,7 @@ const Register = () => {
             value={enteredPassword}
             className={styles[passwordStyle]}
           />
-          {isPasswordInvalid && errorText}
+          {isPasswordInvalid && passwordErrorText}
           <input
             type="password"
             name="repeatPassword"
@@ -134,7 +182,7 @@ const Register = () => {
             value={enteredRepeatPassword}
             className={styles[repeatPasswordStyle]}
           />
-          {isRepeatPasswordInvalid && errorText}
+          {isRepeatPasswordInvalid && passwordErrorText}
           <input
             className={styles["submit-btn"]}
             type="submit"

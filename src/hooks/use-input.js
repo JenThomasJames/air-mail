@@ -29,6 +29,7 @@ const useInput = (validateInput) => {
     inputBlurHandler,
     resetInput,
     isInputInvalid,
+    isValid,
   };
 };
 export default useInput;
