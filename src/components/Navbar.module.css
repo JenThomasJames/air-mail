@@ -7,12 +7,6 @@
   top: 0;
   background: #fff;
 }
-.logo {
-  font-family: "Sacramento", cursive;
-  font-size: 5em;
-  color: var(--brand);
-  cursor: pointer;
-}
 .brand {
   flex: 1;
 }

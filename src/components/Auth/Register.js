@@ -91,7 +91,7 @@ const Register = (props) => {
         throw new Error(error);
       }
       alert("Registration successful! Login to continue.");
-      props.changeRegisterMode(false);
+      props.changeAuthMode(false);
     } catch (err) {
       alert(err.message);
     }
@@ -107,6 +107,11 @@ const Register = (props) => {
     return data;
   };
 
+  //method to change register mode to login mode
+  const loginHandler = () => {
+    props.changeAuthMode(false);
+  };
+
   const fnameStyle = isFnameInvalid ? "error-input" : "valid-input";
   const lnameStyle = isLnameInvalid ? "error-input" : "valid-input";
   const emailStyle = isEmailInvalid ? "error-input" : "valid-input";
@@ -118,7 +123,7 @@ const Register = (props) => {
   return (
     <Card>
       <div className={styles["card-header"]}>
-        <h4>Hey There!</h4>
+        <h4 className="muted-title">Hey There!</h4>
       </div>
       <div className={styles["card-body"]}>
         <form onSubmit={registerHandler} method="GET">
@@ -183,6 +188,14 @@ const Register = (props) => {
             className={styles[repeatPasswordStyle]}
           />
           {isRepeatPasswordInvalid && passwordErrorText}
+          <div className="center">
+            <p className="auth-change-prompt">
+              Already have an account? Let's{" "}
+              <button className="link" onClick={loginHandler}>
+                Login
+              </button>
+            </p>
+          </div>
           <input
             className={styles["submit-btn"]}
             type="submit"
