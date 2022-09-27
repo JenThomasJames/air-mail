@@ -73,27 +73,23 @@ const Register = (props) => {
     event.preventDefault();
     if (enteredPassword !== enteredRepeatPassword || isFormInvalid) return;
     const httpConfig = {
-      endpoint:
-        "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCGYZl8BfGbOUSuN3M_OTKNKH_QD7DO47g",
+      endpoint: "http://localhost:8080/api/user/register",
       method: "POST",
       body: {
+        fname: enteredFirstName,
+        lname: enteredLastName,
         email: enteredEmail,
         password: enteredPassword,
-        returnSecureToken: true,
       },
     };
     try {
       const data = await fireRequest(httpConfig);
-      if (data.error) {
-        const error = data.error.message
-          ? data.error.message
-          : "Authentication failed!";
-        throw new Error(error);
+      if (await data.error) {
+        throw new Error(data.message);
       }
-      alert("Registration successful! Login to continue.");
       props.changeAuthMode(false);
-    } catch (err) {
-      alert(err.message);
+    } catch (error) {
+      alert(error.message);
     }
   };
 
@@ -102,6 +98,9 @@ const Register = (props) => {
     const response = await fetch(config.endpoint, {
       method: config.method ? config.method : "GET",
       body: config.body ? JSON.stringify(config.body) : {},
+      headers: {
+        "Content-Type": "application/json",
+      },
     });
     const data = await response.json();
     return data;
@@ -196,11 +195,7 @@ const Register = (props) => {
               </button>
             </p>
           </div>
-          <input
-            className={styles["submit-btn"]}
-            type="submit"
-            value="Sign up!"
-          />
+          <input className="brand-btn" type="submit" value="Sign up!" />
         </form>
       </div>
     </Card>

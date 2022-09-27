@@ -14,18 +14,24 @@ const Login = (props) => {
       return;
     }
     const httpConfig = {
-      endpoint:
-        "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCGYZl8BfGbOUSuN3M_OTKNKH_QD7DO47g",
-      method: "POST",
-      body: {
+      endpoint: "http://localhost:8080/api/user/authenticate",
+      method: "GET",
+      headers: {
         email: emailRef.current.value,
         password: passwordRef.current.value,
       },
     };
-    const data = await fireRequest(httpConfig);
-    localStorage.setItem("idToken", await data.idToken);
-    localStorage.setItem("isLoggedIn", true);
-    navigate("/inbox");
+    try {
+      const response = await fireRequest(httpConfig);
+      if (response.error) {
+        throw new Error(response.message);
+      }
+      localStorage.setItem("isLoggedIn", true);
+      localStorage.setItem("loggedInUserId", emailRef.current.value);
+      navigate("/inbox");
+    } catch (error) {
+      alert("Login Failed! Please check your credentials");
+    }
   };
 
   //method to validate user credentials
@@ -47,29 +53,12 @@ const Login = (props) => {
 
   //method to fire the login request to firebae
   const fireRequest = async (config) => {
-    try {
-      const response = await fetch(config.endpoint, {
-        body: JSON.stringify(config.body),
-        method: config.method,
-      });
-      const data = await response.json();
-      if (await data.error) {
-        throw new Error(data.error.message);
-      }
-      return data;
-    } catch (error) {
-      if (error.message.includes("EMAIL_NOT_FOUND")) {
-        alert("User not found!");
-      } else if (error.message.includes("INVALID_PASSWORD")) {
-        alert("Invalid password. Please try again");
-      } else if (error.message.includes("MISSING_PASSWORD")) {
-        alert("Enter your password");
-      } else if (error.message.includes("INVALID_EMAIL")) {
-        alert("Enter a valid email");
-      } else {
-        alert("An unknown error occured!");
-      }
-    }
+    const response = await fetch(config.endpoint, {
+      method: config.method,
+      headers: config.headers,
+    });
+    const data = await response.json();
+    return data;
   };
 
   return (
@@ -101,7 +90,7 @@ const Login = (props) => {
               </button>
             </p>
           </div>
-          <input className={styles["submit-btn"]} type="submit" value="Login" />
+          <input className="brand-btn" type="submit" value="Login" />
         </form>
       </div>
     </Card>

@@ -23,6 +23,7 @@
   text-decoration: none;
   color: grey;
   text-overflow: clip;
+  font-size: 0.5em;
 }
 .link:hover {
   color: #000;
@@ -30,6 +31,7 @@
 .active {
   text-decoration: none;
   color: var(--ocean);
+  font-size: 0.5em;
 }
 .menu-btn {
   background: transparent;

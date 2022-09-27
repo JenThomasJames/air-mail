@@ -7,14 +7,3 @@
 .card-body {
   width: 20em;
 }
-.submit-btn {
-  padding: 10px;
-  border-radius: 10px;
-  background-color: var(--ocean);
-  border: none;
-  color: #fff;
-  margin: 10px;
-}
-.submit-btn:hover {
-  background-color: var(--dark-ocean);
-}

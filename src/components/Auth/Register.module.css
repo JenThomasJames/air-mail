@@ -7,44 +7,18 @@
 .card-body {
   width: 100%;
 }
-form {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-}
+
 .row-group {
   display: flex;
   justify-content: space-between;
 }
-input[type="text"],
-input[type="password"] {
-  padding: 10px;
-  outline: none;
-  font-weight: 400;
-  border-radius: 10px;
-  margin: 10px;
-  border: 1px solid rgb(221, 221, 221);
-}
-label {
-  font-size: 15px;
-  margin-right: 20px;
-}
-.submit-btn {
-  padding: 10px;
-  border-radius: 10px;
-  background-color: var(--ocean);
-  border: none;
-  color: #fff;
-  margin: 10px;
-}
+
 .col-group {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
 }
-.submit-btn:hover {
-  background-color: var(--dark-ocean);
-}
+
 .error-input {
   border: 1px solid red;
 }
