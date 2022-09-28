@@ -1,38 +1,45 @@
-import dummyMails from "../dummy/mails";
 import Card from "../components/Card";
 import Mail from "../components/Inbox/Mail";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 const Inbox = () => {
-  const [mails, setMails] = useState(dummyMails);
+  const [isLoading, setIsLoading] = useState(true);
+  const [mails, setMails] = useState([]);
+  const getMailsForInbox = async () => {
+    getAllMailsForUser(localStorage.getItem("loggedInUserId"));
+  };
+  useEffect(() => {
+    getMailsForInbox();
+  }, []);
 
-  //method to delete or archive a mail
-  const deleteMail = (mail, isDelete) => {
-    let modifiedMails = [];
-    if (isDelete) {
-      mails.forEach((i) => {
-        if (i.id !== mail.id) {
-          modifiedMails.push(i);
-        }
-      });
-      setMails(modifiedMails);
-    } else {
-      modifiedMails = [...mails];
-      let indexOfMail = modifiedMails.findIndex(
-        (element) => element.id === mail.id
-      );
-      modifiedMails[indexOfMail].visible = false;
-      setMails(modifiedMails);
-    }
+  const getAllMailsForUser = async (email) => {
+    setIsLoading(true);
+    const response = await fetch("http://localhost:8080/api/mail/" + email);
+    const data = await response.json();
+    setMails(data.data);
+    setIsLoading(false);
+  };
+
+  const deleteMail = (mailId) => {
+    const newMails = [...mails];
+    const updatedMails = newMails.filter((mail) => mailId !== mail.mailId);
+    setMails(updatedMails);
   };
 
   return (
     <div style={{ margin: 20 }}>
       <p className="page-title">Inbox</p>
-      <Card>
-        {mails.map((mail) => (
-          <Mail key={mail.id} data={mail} deleteMail={deleteMail} />
-        ))}
-      </Card>
+      {!isLoading && mails.length > 0 && (
+        <Card>
+          {mails.map((mail) => (
+            <Mail key={mail.mailId} deleteMail={deleteMail} data={mail} />
+          ))}
+        </Card>
+      )}
+      {mails.length === 0 && (
+        <Card>
+          <p style={{ color: "#000" }}>No mails found!</p>
+        </Card>
+      )}
     </div>
   );
 };

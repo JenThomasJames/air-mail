@@ -17,7 +17,8 @@
   font-weight: 300;
 }
 .trash,
-.archive {
+.archive,
+.eye {
   background: transparent;
   border: none;
   cursor: pointer;
@@ -30,9 +31,15 @@
 .archive:hover {
   color: rgb(192, 192, 10);
 }
+.eye:hover {
+  color: rgb(71, 71, 239);
+}
 .mail-card {
   background: transparent;
   border: 1px solid rgb(221, 221, 221);
   border-radius: 5px;
   padding: 10px;
+}
+.mail-card:hover {
+  background-color: rgb(238, 238, 238);
 }
