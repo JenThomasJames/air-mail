@@ -100,7 +100,7 @@ const Navbar = (props) => {
                       ? styles["drawer-link-active"]
                       : styles["drawer-link"]
                   }
-                  to="archived"
+                  to="archive"
                 >
                   Archived
                 </NavLink>
