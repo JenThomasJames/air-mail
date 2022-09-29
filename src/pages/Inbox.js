@@ -11,6 +11,7 @@ const Inbox = () => {
     getMailsForInbox();
   }, []);
 
+  // fetches all the mails sent to a given user
   const getAllMailsForUser = async (email) => {
     setIsLoading(true);
     const response = await fetch("http://localhost:8080/api/mail/" + email);
@@ -19,6 +20,7 @@ const Inbox = () => {
     setIsLoading(false);
   };
 
+  //removes a mail from the state once it is deleted or archived
   const removeMailFromState = (mailId) => {
     const newMails = [...mails];
     const updatedMails = newMails.filter((mail) => mailId !== mail.mailId);
