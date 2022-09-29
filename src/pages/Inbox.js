@@ -19,7 +19,7 @@ const Inbox = () => {
     setIsLoading(false);
   };
 
-  const deleteMail = (mailId) => {
+  const removeMailFromState = (mailId) => {
     const newMails = [...mails];
     const updatedMails = newMails.filter((mail) => mailId !== mail.mailId);
     setMails(updatedMails);
@@ -31,7 +31,11 @@ const Inbox = () => {
       {!isLoading && mails.length > 0 && (
         <Card>
           {mails.map((mail) => (
-            <Mail key={mail.mailId} deleteMail={deleteMail} data={mail} />
+            <Mail
+              key={mail.mailId}
+              removeMailFromState={removeMailFromState}
+              data={mail}
+            />
           ))}
         </Card>
       )}
