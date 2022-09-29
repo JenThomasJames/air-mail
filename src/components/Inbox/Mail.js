@@ -40,7 +40,11 @@ const Mail = (props) => {
     <div className={styles["mail-card"]}>
       <div className={styles.mail}>
         <p className={styles.subject}>{props.data.subject}</p>
-        <p className={styles.sender}>{props.data.senderEmail}</p>
+        <p className={styles.sender}>
+          {!props.isSentMails
+            ? props.data.senderEmail
+            : props.data.receiverEmail}
+        </p>
         <button onClick={viewHandler} className={styles.eye}>
           <Eye size={20} />
         </button>
