@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import { Archive, Trash, Eye } from "react-bootstrap-icons";
 import styles from "./Mail.module.css";
 const Mail = (props) => {
@@ -43,12 +44,16 @@ const Mail = (props) => {
         <button onClick={viewHandler} className={styles.eye}>
           <Eye size={20} />
         </button>
-        <button onClick={deleteHandler} className={styles.trash}>
-          <Trash size={20} />
-        </button>
-        <button onClick={archiveHandler} className={styles.archive}>
-          <Archive size={20} />
-        </button>
+        {!props.isSentMails && (
+          <Fragment>
+            <button onClick={deleteHandler} className={styles.trash}>
+              <Trash size={20} />
+            </button>
+            <button onClick={archiveHandler} className={styles.archive}>
+              <Archive size={20} />
+            </button>
+          </Fragment>
+        )}
       </div>
     </div>
   );
