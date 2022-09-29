@@ -1,0 +1,33 @@
+.flex {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.card-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 40vw;
+}
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.text-muted {
+  color: grey;
+  font-size: 0.6em;
+}
+.logout-btn {
+  background-color: #c82b2b;
+  padding: 0.5em 1em;
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  cursor: pointer;
+  font-weight: 600;
+}
+.logout-btn:hover {
+  background-color: #c71010;
+}
