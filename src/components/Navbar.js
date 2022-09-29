@@ -1,6 +1,6 @@
 import styles from "./Navbar.module.css";
 import { NavLink } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { ThreeDotsVertical } from "react-bootstrap-icons";
 const Navbar = (props) => {
   const [showMenu, setShowMenu] = useState(false);

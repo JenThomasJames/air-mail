@@ -9,6 +9,8 @@ const Inbox = () => {
   };
   useEffect(() => {
     getMailsForInbox();
+
+    //eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // fetches all the mails sent to a given user
